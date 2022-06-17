@@ -17,7 +17,7 @@ app.use(fileUpload());
 
 app.use(express.static(path.join(process.cwd(), "uploads")));
 
-app.use(checkToken);
+// app.use(checkToken);
 
 app.use(userRouter);
 app.use(messageRouter);
