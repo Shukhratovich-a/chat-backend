@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "username": "Fillip",
+    "contact": "998908050447",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "avatar": null
+  },
+  {
+    "id": 2,
+    "username": "Garri",
+    "contact": "998909406686",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "avatar": null
+  },
+  {
+    "id": 3,
+    "username": "Martin",
+    "contact": "998901204757",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "avatar": null
+  },
+  {
+    "username": "andrey",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "contact": "998908050447",
+    "id": 4,
+    "avatar": "1655503132622Recommendations.jpg"
+  },
+  {
+    "username": "joshqin",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "contact": "998908050447",
+    "id": 5,
+    "avatar": "1655503774597teaching-min.png"
+  },
+  {
+    "username": "sunnat",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "contact": "998908050447",
+    "id": 6,
+    "avatar": "1655504143726B5727EDD-EE62-46FD-8FF5-393A9E752C79.jpeg"
+  }
+]

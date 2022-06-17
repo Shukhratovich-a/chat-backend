@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "message_text": "Hello",
+    "message_file": null,
+    "message_date": 12345676568
+  }
+]
