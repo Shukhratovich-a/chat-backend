@@ -1,9 +1,15 @@
 [
   {
+    "message_text": "The Crown",
     "id": 1,
-    "user_id": 1,
-    "message_text": "Hello",
-    "message_file": null,
-    "message_date": 12345676568
+    "user_id": 4,
+    "message_date": 1655556243431,
+    "message_file": {
+      "name": "1655556243431teaching-min.png",
+      "size": 584481,
+      "mimetype": "image/png",
+      "show_link": "http://localhost:6500/1655556243431teaching-min.png",
+      "download_link": "http://localhost:6500/messages/1655556243431teaching-min.png"
+    }
   }
 ]
