@@ -7,8 +7,6 @@ import fileUpload from "express-fileupload";
 import { Server } from "socket.io";
 import { HOST, PORT } from "./config.js";
 
-import checkToken from "./middlewares/checkToken.js";
-
 import userRouter from "./routers/user.js";
 import messageRouter from "./routers/message.js";
 
@@ -18,8 +16,6 @@ app.use(fileUpload());
 app.use(cors());
 
 app.use(express.static(path.join(process.cwd(), "uploads")));
-
-app.use(checkToken);
 
 app.use(userRouter);
 app.use(messageRouter);

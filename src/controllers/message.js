@@ -1,5 +1,6 @@
 import path from "path";
 import { HOST } from "../config.js";
+import { ForbiddenError } from "../utils/errors.js";
 import { read, write } from "../utils/model.js";
 
 const GET = (req, res, next) => {
@@ -11,6 +12,12 @@ const GET = (req, res, next) => {
 
     const messages = read("messages").map((message) => {
       message.user = users.find((user) => user.id == message.user_id);
+
+      if (message.message_file) {
+        console.log(message.message_file);
+        message.message_file.show_link = `${HOST}/${message.message_file.name}`;
+        message.message_file.download_link = `${HOST}/download/${message.message_file.name}`;
+      }
 
       delete message.user.password;
       delete message.user_id;
@@ -33,7 +40,7 @@ const DOWNLOAD = (req, res, next) => {
   try {
     const { fileName } = req.params;
 
-    res.status(200).download(path.join(process.cwd(), uploads, fileName));
+    res.download(path.join(process.cwd(), "uploads", fileName));
   } catch (error) {
     return next(new InternalServerError(500, error.message));
   }
@@ -56,11 +63,15 @@ const POST = (req, res, next) => {
         name: fileName,
         size: file.size,
         mimetype: file.mimetype,
-        show_link: `${HOST}/${fileName}`,
-        download_link: `${HOST}/messages/${fileName}`,
       };
     } else {
       req.body.message_file = null;
+    }
+
+    if (!req.body.message_text) req.body.message_text = null;
+
+    if (!(req.body.message_file || req.body.message_text)) {
+      return next(new ForbiddenError(403, "no data"));
     }
 
     messages.push(req.body);
@@ -68,6 +79,11 @@ const POST = (req, res, next) => {
 
     req.body.user = users.find((user) => user.id == req.body.user_id);
     req.body.user.avatar = `${HOST}/${req.body.user.avatar}`;
+
+    if (req.body.message_file) {
+      req.body.message_file.show_link = `${HOST}/${req.body.message_file.name}`;
+      req.body.message_file.download_link = `${HOST}/download/${req.body.message_file.name}`;
+    }
 
     delete req.body.user_id;
     delete req.body.user.password;

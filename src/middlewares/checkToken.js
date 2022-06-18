@@ -3,7 +3,8 @@ import { ForbiddenError } from "../utils/errors.js";
 
 export default (req, res, next) => {
   try {
-    if (req.url == "/login" || req.url == "/register") return next();
+    if (req.url == "/login" || req.url == "/register" || req.url == "/download")
+      return next();
 
     const { token } = req.headers;
 
