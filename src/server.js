@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import http from "http";
+import cors from "cors";
 import express from "express";
 import fileUpload from "express-fileupload";
 import { Server } from "socket.io";
@@ -14,6 +15,7 @@ import messageRouter from "./routers/message.js";
 const app = express();
 app.use(express.json());
 app.use(fileUpload());
+app.use(cors());
 
 app.use(express.static(path.join(process.cwd(), "uploads")));
 
