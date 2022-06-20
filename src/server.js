@@ -45,7 +45,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 io.on("connection", (client) => {
-  console.log(client.id);
+  // console.log(client.id);
 });
 
 server.listen(PORT, () => console.log(`server run ${HOST}`));

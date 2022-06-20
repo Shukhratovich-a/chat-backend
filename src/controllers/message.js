@@ -78,7 +78,7 @@ const POST = (req, res, next) => {
     write("messages", messages);
 
     req.body.user = users.find((user) => user.id == req.body.user_id);
-    req.body.user.avatar = `${HOST}/${req.body.user.avatar}`;
+    if (req.body.user.avatar) req.body.user.avatar = `${HOST}/${req.body.user.avatar}`;
 
     if (req.body.message_file) {
       req.body.message_file.show_link = `${HOST}/${req.body.message_file.name}`;
@@ -92,7 +92,7 @@ const POST = (req, res, next) => {
       status: 200,
       message: "success",
       userId: req.userId,
-      data: req.body,
+      data: [req.body],
     });
   } catch (error) {
     return next(new InternalServerError(500, error.message));
