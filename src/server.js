@@ -64,6 +64,8 @@ io.on("connection", (client) => {
     write("messages", messages);
 
     newMessage.user = users.find((user) => user.id == userId);
+    if (newMessage.user.avatar) newMessage.user.avatar = `${HOST}/${newMessage.user.avatar}`;
+
     delete newMessage.user_id;
     delete newMessage.user.password;
 
