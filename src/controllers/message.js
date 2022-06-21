@@ -96,4 +96,4 @@ const POST = (req, res, next) => {
   }
 };
 
-export default { GET, DOWNLOAD };
+export default { GET, POST, DOWNLOAD };
