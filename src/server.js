@@ -50,17 +50,22 @@ io.on("connection", (client) => {
   client.on("new message", ({ token, message }) => {
     let { userId } = jwt.verify(token);
     let messages = read("messages");
+    let users = read("users");
 
     let newMessage = {
       id: messages.length ? messages.at(-1).id + 1 : 1,
-      user_id: userId,
       message_text: message,
-      message_date: Date.now(),
       message_file: null,
+      message_date: Date.now(),
+      user_id: userId,
     };
 
     messages.push(newMessage);
     write("messages", messages);
+
+    newMessage.user = users.find((user) => user.id == userId);
+    delete newMessage.user_id;
+    delete newMessage.user.password;
 
     client.broadcast.emit("send message", { data: [newMessage] });
   });
