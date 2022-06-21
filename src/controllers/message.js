@@ -46,57 +46,57 @@ const DOWNLOAD = (req, res, next) => {
   }
 };
 
-const POST = (req, res, next) => {
-  try {
-    const messages = read("messages");
-    const users = read("users");
+// const POST = (req, res, next) => {
+//   try {
+//     const messages = read("messages");
+//     const users = read("users");
 
-    req.body.id = messages.lenght ? messages.at(-1).id + 1 : 1;
-    req.body.user_id = req.userId;
-    req.body.message_date = Date.now();
+//     req.body.id = messages.lenght ? messages.at(-1).id + 1 : 1;
+//     req.body.user_id = req.userId;
+//     req.body.message_date = Date.now();
 
-    if (req.files) {
-      const { file } = req.files;
-      const fileName = Date.now() + file.name;
-      file.mv(path.join(process.cwd(), "uploads", fileName));
-      req.body.message_file = {
-        name: fileName,
-        size: file.size,
-        mimetype: file.mimetype,
-      };
-    } else {
-      req.body.message_file = null;
-    }
+//     if (req.files) {
+//       const { file } = req.files;
+//       const fileName = Date.now() + file.name;
+//       file.mv(path.join(process.cwd(), "uploads", fileName));
+//       req.body.message_file = {
+//         name: fileName,
+//         size: file.size,
+//         mimetype: file.mimetype,
+//       };
+//     } else {
+//       req.body.message_file = null;
+//     }
 
-    if (!req.body.message_text) req.body.message_text = null;
+//     if (!req.body.message_text) req.body.message_text = null;
 
-    if (!(req.body.message_file || req.body.message_text)) {
-      return next(new ForbiddenError(403, "no data"));
-    }
+//     if (!(req.body.message_file || req.body.message_text)) {
+//       return next(new ForbiddenError(403, "no data"));
+//     }
 
-    messages.push(req.body);
-    write("messages", messages);
+//     messages.push(req.body);
+//     write("messages", messages);
 
-    req.body.user = users.find((user) => user.id == req.body.user_id);
-    if (req.body.user.avatar) req.body.user.avatar = `${HOST}/${req.body.user.avatar}`;
+//     req.body.user = users.find((user) => user.id == req.body.user_id);
+//     if (req.body.user.avatar) req.body.user.avatar = `${HOST}/${req.body.user.avatar}`;
 
-    if (req.body.message_file) {
-      req.body.message_file.show_link = `${HOST}/${req.body.message_file.name}`;
-      req.body.message_file.download_link = `${HOST}/download/${req.body.message_file.name}`;
-    }
+//     if (req.body.message_file) {
+//       req.body.message_file.show_link = `${HOST}/${req.body.message_file.name}`;
+//       req.body.message_file.download_link = `${HOST}/download/${req.body.message_file.name}`;
+//     }
 
-    delete req.body.user_id;
-    delete req.body.user.password;
+//     delete req.body.user_id;
+//     delete req.body.user.password;
 
-    res.status(200).json({
-      status: 200,
-      message: "success",
-      userId: req.userId,
-      data: [req.body],
-    });
-  } catch (error) {
-    return next(new InternalServerError(500, error.message));
-  }
-};
+//     res.status(200).json({
+//       status: 200,
+//       message: "success",
+//       userId: req.userId,
+//       data: [req.body],
+//     });
+//   } catch (error) {
+//     return next(new InternalServerError(500, error.message));
+//   }
+// };
 
-export default { GET, POST, DOWNLOAD };
+export default { GET, DOWNLOAD };
