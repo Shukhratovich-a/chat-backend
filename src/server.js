@@ -62,7 +62,7 @@ io.on("connection", (client) => {
     messages.push(newMessage);
     write("messages", messages);
 
-    client.broadcast.emit("send message", { data: newMessage });
+    client.broadcast.emit("send message", { data: [newMessage] });
   });
 });
 
